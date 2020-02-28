@@ -28,4 +28,16 @@ describe('board.js', () => {
 
     expect(returnedResult).toEqual(true);
   });
+
+  it('checkIfPlayerWon(grid) detects that no one has won', () => {
+    const gridState = [
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_O],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X]
+    ];
+
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(false);
+  });
 });
