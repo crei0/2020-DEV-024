@@ -16,8 +16,8 @@ describe('Board', () => {
   });
 
   test('renders 9 <BoardCell />', () => {
-    const wrapper = shallow(<BoardCell />);
+    const wrapper = shallow(<Board />);
 
-    expect(wrapper.find(BoardCell)).to.have.length(9);
+    expect(wrapper.find(BoardCell).length).toBe(9);
   });
 });

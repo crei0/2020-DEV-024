@@ -2,6 +2,7 @@ import React from 'react';
 
 import { PLAYER, GAME_STATE } from '../enums/board';
 import { resetGridState } from '../logic/board.js';
+import BoardCell from '../components/BoardCell';
 
 class Board extends React.Component {
   state = {
@@ -23,10 +24,30 @@ class Board extends React.Component {
     );
   }
 
+  /**
+   * Just renders the Board structure
+   * 
+   * @param {Array} grid The Grid's array
+   */
+  renderBoardStructure = (grid) => {
+    return grid.map((row, rowIndex) =>
+      <div className="row" key={`row-${rowIndex}`}>
+        { row.map((value, columnIndex) =>
+          <div key={`cell-${rowIndex}-${columnIndex}`}>
+            <BoardCell 
+              value={value}
+            />
+          </div>
+        )}
+      </div>
+    )
+  };
+
   render() {
     const {
       currentPlayer,
-      gameState
+      gameState,
+      grid
     } = this.state;
 
     let message = '';
@@ -46,9 +67,13 @@ class Board extends React.Component {
 
     return (
       <div>
-        <span className="container-fluid">
+        <div className="container-fluid">
           { message }
-        </span>
+        </div>
+
+        <div className="container">
+          { this.renderBoardStructure(grid) }
+        </div>
       </div>
     );
   }
