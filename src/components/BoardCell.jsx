@@ -52,7 +52,7 @@ BoardCell.propTypes = {
   /**
    * Function called when the cell is clicked
    */
-  clickHandler: PropTypes.func
+  clickHandler: PropTypes.func.isRequired
 };
 
 export default BoardCell;
