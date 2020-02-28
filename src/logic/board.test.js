@@ -2,6 +2,10 @@ import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
 import { resetGridState, checkIfPlayerWon } from './board.js'
 
+const checkIfGameIsTied = () => {
+  return false;
+};
+
 describe('board.js', () => {
   it('resetGridState() returns an empty grid state', () => {
     const expectedResult = {
@@ -39,5 +43,17 @@ describe('board.js', () => {
     const returnedResult = checkIfPlayerWon(gridState);
 
     expect(returnedResult).toEqual(false);
+  });
+
+  it('checkIfGameIsTied(grid) detects the game is tied', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X]
+    ];
+
+    const returnedResult = checkIfGameIsTied(gridState);
+
+    expect(returnedResult).toEqual(true);
   });
 });
