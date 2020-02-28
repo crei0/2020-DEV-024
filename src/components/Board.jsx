@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { PLAYER, GAME_STATE } from '../enums/board';
-import { resetGridState } from '../logic/board.js';
+import { PLAYER, GAME_STATE, CELL_VALUES } from '../enums/board';
+import { resetGridState, checkIfPlayerWon, checkIfGameIsTied } from '../logic/board';
 import BoardCell from '../components/BoardCell';
 
 class Board extends React.Component {
@@ -24,6 +24,43 @@ class Board extends React.Component {
     );
   }
 
+    /**
+   * Handles the clicks on the cells, and updates the state
+   * 
+   * @param {Number} x The x-axis position for the clicked cell
+   * @param {Number} y The y-axis position for the clicked cell
+   */
+  handleCellClick = (x, y) => {
+    const {
+      grid,
+      currentPlayer,
+      gameState
+    } = this.state;
+    
+    if (gameState === GAME_STATE.PLAYING) {
+      if (grid[y][x] === CELL_VALUES.EMPTY) {
+        grid[y][x] = currentPlayer;
+  
+        if (checkIfPlayerWon(grid)) {
+          this.setState({
+            grid: grid,
+            gameState: GAME_STATE.PLAYER_WON
+          });
+        } else if (checkIfGameIsTied(grid)) {
+          this.setState({
+            grid: grid,
+            gameState: GAME_STATE.TIE
+          });
+        } else {
+          this.setState({
+            grid: grid,
+            currentPlayer: currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X
+          });
+        }
+      }
+    }
+  };
+
   /**
    * Just renders the Board structure
    * 
@@ -38,6 +75,7 @@ class Board extends React.Component {
               y={rowIndex}
               x={columnIndex}
               value={value}
+              clickHandler={this.handleCellClick}
             />
           </div>
         )}
