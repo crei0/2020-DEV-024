@@ -1,10 +1,6 @@
 import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
-import { resetGridState, checkIfPlayerWon } from './board.js'
-
-const checkIfGameIsTied = () => {
-  return false;
-};
+import { resetGridState, checkIfPlayerWon, checkIfGameIsTied } from './board.js';
 
 describe('board.js', () => {
   it('resetGridState() returns an empty grid state', () => {

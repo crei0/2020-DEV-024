@@ -66,3 +66,17 @@ export const checkIfPlayerWon = (grid) => {
 
   return false;
 };
+
+/**
+ * Checks if the game is Tied
+ * 
+ * @param {Array} grid The Grid's array
+ * @returns {Boolean}
+ */
+export const checkIfGameIsTied = (grid) => {
+  // Flatten and convert to String, then check if there's an empty cell
+  return grid
+    .flat(2)
+    .toString()
+    .indexOf(CELL_VALUES.EMPTY) === -1;
+};
