@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-const BoardCell = () => {};
+import BoardCell from './BoardCell';
 
 describe('BoardCell', () => {
   it('should render a <div />', () => {
