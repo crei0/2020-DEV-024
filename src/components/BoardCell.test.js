@@ -6,12 +6,18 @@ import { CELL_VALUES } from '../enums/board';
 
 describe('BoardCell', () => {
   it('should render a <div />', () => {
-    const wrapper = shallow(<BoardCell />);
+    const wrapper = shallow((
+      <BoardCell
+        y={0}
+        x={0}
+        value={CELL_VALUES.CELL_X}
+      />
+    ));
     
     expect(wrapper.find('div').length).toEqual(1);
   });
 
-  it(`Has text value of ${CELL_VALUES.CELL_X}`, () => {
+  it(`Has value of '${CELL_VALUES.CELL_X}'`, () => {
     const boardCell = shallow((
       <BoardCell
         y={0}
