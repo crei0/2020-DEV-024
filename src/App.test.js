@@ -17,7 +17,5 @@ test('renders without crashing', () => {
 it('should render the <Board /> component', () => {
   const wrapper = shallow(<App />);
 
-  console.info(wrapper);
-
   expect(wrapper.containsMatchingElement(<Board />)).toEqual(true);
 });

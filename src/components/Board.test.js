@@ -1,13 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import Board from './Board';
 
 // Board is rendering correctly?
 describe('Board', () => {
-  it('should render a <div />', () => {
-    const wrapper = shallow(<Board />);
-    
-    expect(wrapper.find('div').length).toEqual(1);
+  test('renders without crashing', () => {
+    const { getByText } = render(<Board />);
+
+    const title = getByText(/The current player is 'X'/i);
+
+    expect(title).toBeInTheDocument();
   });
 });

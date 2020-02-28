@@ -49,8 +49,6 @@ class Board extends React.Component {
         <span className="container-fluid">
           { message }
         </span>
-
-        Board renders here
       </div>
     );
   }
