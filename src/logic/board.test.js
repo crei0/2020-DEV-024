@@ -1,6 +1,6 @@
 import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
-import { resetGridState } from './board.js'
+import { resetGridState, checkIfPlayerWon } from './board.js'
 
 describe('board.js', () => {
   it('resetGridState() returns an empty grid state', () => {
@@ -16,7 +16,6 @@ describe('board.js', () => {
 
     expect(resetGridState()).toStrictEqual(expectedResult)
   });
-
 
   it('checkIfPlayerWon(grid) detects that one player has won', () => {
     const gridState = [
