@@ -16,4 +16,17 @@ describe('board.js', () => {
 
     expect(resetGridState()).toStrictEqual(expectedResult)
   });
+
+
+  it('checkIfPlayerWon(grid) detects that one player has won', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
 });
