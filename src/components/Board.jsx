@@ -34,7 +34,9 @@ class Board extends React.Component {
       <div className="row" key={`row-${rowIndex}`}>
         { row.map((value, columnIndex) =>
           <div key={`cell-${rowIndex}-${columnIndex}`}>
-            <BoardCell 
+            <BoardCell
+              y={rowIndex}
+              x={columnIndex}
               value={value}
             />
           </div>

@@ -15,7 +15,7 @@ class BoardCell extends React.Component {
 
     this.props.clickHandler(x, y);
   }
-  
+
   render() {
     const { value } = this.props;
 
@@ -37,17 +37,17 @@ BoardCell.propTypes = {
   /**
    * The X-axis (horizontal) position
    */
-  x: PropTypes.number,
+  x: PropTypes.number.isRequired,
 
   /**
    * The Y-axis (vertical) position
    */
-  y: PropTypes.number,
+  y: PropTypes.number.isRequired,
   
   /**
    * Can be "-" (empty), 'X', 'O'
    */
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
 
   /**
    * Function called when the cell is clicked
