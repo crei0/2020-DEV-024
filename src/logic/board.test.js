@@ -1,9 +1,8 @@
 import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
-const resetGridState = () => {};
+import { resetGridState } from './board.js'
 
 describe('board.js', () => {
-  // TODO: FIXME: This test fails until the real `resetGridState` function is created
   it('resetGridState() returns an empty grid state', () => {
     const expectedResult = {
       grid: [

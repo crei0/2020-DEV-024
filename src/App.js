@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Board from './components/Board';
+
 function App() {
   return (
     <div className="tic-tac-toe">
@@ -9,7 +11,7 @@ function App() {
         </h1>
       </header>
       <main>
-        Board goes here
+        <Board />
       </main>
     </div>
   );
