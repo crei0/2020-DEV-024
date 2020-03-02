@@ -154,6 +154,18 @@ describe('board.js > checkIfGameIsTiedAndNotWon(...)', () => {
 
     expect(returnedResult).toEqual(true);
   });
+
+  it('checkIfGameIsTiedAndNotWon(grid) check if game has not been won', () => {
+    const gridState = [
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_x],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X]
+    ];
+
+    const returnedResult = checkIfGameIsTiedAndNotWon(gridState);
+
+    expect(returnedResult).toEqual(false);
+  });
 });
 
 describe('board.js > getCurrentGameStateMessage(...)', () => {
