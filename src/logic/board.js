@@ -91,7 +91,23 @@ export const checkIfGameIsTied = (grid) => {
   return !checkIfPlayerWon(grid) && _checkIfThereIsStillAnEmptyCell(grid);
 };
 
-// TODO: FIXME: WIP: Add logic and rerun tests
+/**
+ * Returns the current game state message that should appear on the top of the board,
+ * saying that the game is in Play, is Tied, or a certain player has won it
+ * 
+ * @param {(GAME_STATE|String)} gameState The current game State (GAME_STATE)
+ * @param {(PLAYER|String)} currentPlayer The currently player that is on his/her turn (PLAYER)
+ * @returns {Boolean} The game state message
+ */
 export const getCurrentGameStateMessage = (gameState, currentPlayer) => {
-  return false;
-}
+  switch (gameState) {
+    case GAME_STATE.PLAYER_WON:
+      return `The player '${currentPlayer}' WON`;
+
+    case GAME_STATE.TIE:
+      return 'The game is TIED, please restart';
+
+    default:
+      return `The current player is '${currentPlayer}'`;
+  }
+};

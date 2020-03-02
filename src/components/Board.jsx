@@ -1,7 +1,12 @@
 import React from 'react';
 
 import { PLAYER, GAME_STATE, CELL_VALUES } from '../enums/board';
-import { resetGridState, checkIfPlayerWon, checkIfGameIsTied } from '../logic/board';
+import {
+  resetGridState,
+  checkIfPlayerWon,
+  checkIfGameIsTied,
+  getCurrentGameStateMessage
+} from '../logic/board';
 import BoardCell from '../components/BoardCell';
 
 class Board extends React.Component {
@@ -90,25 +95,10 @@ class Board extends React.Component {
       grid
     } = this.state;
 
-    let message = '';
-    switch (gameState) {
-      case GAME_STATE.PLAYER_WON:
-        message = `The player '${currentPlayer}' WON`;
-        break;
-
-      case GAME_STATE.TIE:
-        message = 'The game is TIED, please restart';
-        break;
-
-      default:
-        message = `The current player is '${currentPlayer}'`;
-        break;
-    }
-
     return (
       <div>
         <div className="container-fluid">
-          { message }
+          { getCurrentGameStateMessage(gameState, currentPlayer) }
         </div>
 
         <div className="container">
