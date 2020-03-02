@@ -17,11 +17,16 @@ class BoardCell extends React.Component {
   }
 
   render() {
-    const { value } = this.props;
+    const {
+      value,
+      x,
+      y
+    } = this.props;
 
     return (
       <div className="col-sm tic-tac-toe__board-cell">
         <button 
+          data-testid={`${x},${y}`}
           onClick={this.handleClick}
           disabled={value !== CELL_VALUES.EMPTY}
           type="button"

@@ -30,7 +30,7 @@ describe('Board', () => {
   });
 });
 
-describe('board.js > getInitialBoardState(...)', () => {
+describe('getInitialBoardState(...)', () => {
   it('getInitialBoardState() returns an empty grid state', () => {
     const expectedResult = {
       grid: [
@@ -46,7 +46,7 @@ describe('board.js > getInitialBoardState(...)', () => {
   });
 });
 
-describe('board.js > checkIfPlayerWon(...)', () => {
+describe('checkIfPlayerWon(...)', () => {
   // Column 1
   it('checkIfPlayerWon(grid) detects that one player has won using the 1st column', () => {
     const gridState = [
@@ -165,7 +165,7 @@ describe('board.js > checkIfPlayerWon(...)', () => {
   });
 });
 
-describe('board.js > checkIfGameIsTiedAndNotWon(...)', () => {
+describe('checkIfGameIsTiedAndNotWon(...)', () => {
   it('checkIfGameIsTiedAndNotWon(grid) detects the game is tied', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
@@ -191,7 +191,7 @@ describe('board.js > checkIfGameIsTiedAndNotWon(...)', () => {
   });
 });
 
-describe('board.js > getCurrentGameStateMessage(...)', () => {
+describe('getCurrentGameStateMessage(...)', () => {
   it('getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O) returns that the player O has won', () => {
     const message = getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O);
 
