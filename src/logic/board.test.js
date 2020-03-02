@@ -7,7 +7,7 @@ import {
   getCurrentGameStateMessage
 } from './board.js';
 
-describe('board.js', () => {
+describe('board.js > resetGridState(...)', () => {
   it('resetGridState() returns an empty grid state', () => {
     const expectedResult = {
       grid: [
@@ -21,7 +21,9 @@ describe('board.js', () => {
 
     expect(resetGridState()).toStrictEqual(expectedResult)
   });
+});
 
+describe('board.js > checkIfPlayerWon(...)', () => {
   it('checkIfPlayerWon(grid) detects that one player has won', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
@@ -45,7 +47,9 @@ describe('board.js', () => {
 
     expect(returnedResult).toEqual(false);
   });
+});
 
+describe('board.js > checkIfGameIsTied(...)', () => {
   it('checkIfGameIsTied(grid) detects the game is tied', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
@@ -57,7 +61,9 @@ describe('board.js', () => {
 
     expect(returnedResult).toEqual(true);
   });
+});
 
+describe('board.js > getCurrentGameStateMessage(...)', () => {
   it('getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O) returns that the player O has won', () => {
     const message = getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O);
 
