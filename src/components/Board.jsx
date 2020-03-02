@@ -8,7 +8,7 @@ import BoardCell from '../components/BoardCell';
  * 
  * @returns {Object} The re-initialized grid state
  */
-export const resetBoardState = () => (
+export const getInitialBoardState = () => (
   {
     grid: [
       [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY],
@@ -131,7 +131,7 @@ class Board extends React.Component {
    */
   resetGrid = () => {
     this.setState(
-      resetBoardState()
+      getInitialBoardState()
     );
   }
 

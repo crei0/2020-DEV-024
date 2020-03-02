@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import 
   Board,
   {
-    resetBoardState,
+    getInitialBoardState,
     checkIfPlayerWon,
     checkIfGameIsTiedAndNotWon,
     getCurrentGameStateMessage
@@ -30,8 +30,8 @@ describe('Board', () => {
   });
 });
 
-describe('board.js > resetBoardState(...)', () => {
-  it('resetBoardState() returns an empty grid state', () => {
+describe('board.js > getInitialBoardState(...)', () => {
+  it('getInitialBoardState() returns an empty grid state', () => {
     const expectedResult = {
       grid: [
         [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
@@ -42,7 +42,7 @@ describe('board.js > resetBoardState(...)', () => {
       gameState: GAME_STATE.PLAYING
     };
 
-    expect(resetBoardState()).toStrictEqual(expectedResult)
+    expect(getInitialBoardState()).toStrictEqual(expectedResult)
   });
 });
 
