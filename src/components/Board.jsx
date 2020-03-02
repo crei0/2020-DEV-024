@@ -157,6 +157,7 @@ export const calculateNewGameState = (gameState, grid, currentPlayer, x, y) => {
     }
   }
 
+  // Don't do anything because the game is not in play (it has been won by a player or it is tied)
   return null;
 };
 
