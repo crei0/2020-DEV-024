@@ -1,6 +1,11 @@
 import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
-import { resetGridState, checkIfPlayerWon, checkIfGameIsTied } from './board.js';
+import {
+  resetGridState,
+  checkIfPlayerWon,
+  checkIfGameIsTied,
+  getCurrentGameStateMessage
+} from './board.js';
 
 describe('board.js', () => {
   it('resetGridState() returns an empty grid state', () => {
@@ -51,5 +56,23 @@ describe('board.js', () => {
     const returnedResult = checkIfGameIsTied(gridState);
 
     expect(returnedResult).toEqual(true);
+  });
+
+  it('getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O) returns that the player O has won', () => {
+    const message = getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O);
+
+    expect(message).toEqual(`The player '${PLAYER.O}' WON`);
+  });
+
+  it('getCurrentGameStateMessage(GAME_STATE.TIE, PLAYER.X) returns that the game is tied and it needs to be restarted', () => {
+    const message = getCurrentGameStateMessage(GAME_STATE.TIE, PLAYER.X);
+
+    expect(message).toEqual('The game is TIED, please restart');
+  });
+
+  it('getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X) returns that the game is tied and it needs to be restarted', () => {
+    const message = getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X);
+
+    expect(message).toEqual(`The current player is '${PLAYER.X}'`);
   });
 });

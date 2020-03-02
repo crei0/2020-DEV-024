@@ -90,3 +90,8 @@ const _checkIfThereIsStillAnEmptyCell = (grid) => {
 export const checkIfGameIsTied = (grid) => {
   return !checkIfPlayerWon(grid) && _checkIfThereIsStillAnEmptyCell(grid);
 };
+
+// TODO: FIXME: WIP: Add logic and rerun tests
+export const getCurrentGameStateMessage = (gameState, currentPlayer) => {
+  return false;
+}
