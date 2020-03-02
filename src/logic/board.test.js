@@ -24,7 +24,34 @@ describe('board.js > resetGridState(...)', () => {
 });
 
 describe('board.js > checkIfPlayerWon(...)', () => {
-  it('checkIfPlayerWon(grid) detects that one player has won', () => {
+  // Column 1
+  it('checkIfPlayerWon(grid) detects that one player has won using the 1st column', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
+      [CELL_VALUES.CELL_X, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // Column 2
+  it('checkIfPlayerWon(grid) detects that one player has won using the 2nd column', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // Column 3
+  it('checkIfPlayerWon(grid) detects that one player has won using the 3rd column', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
@@ -36,6 +63,72 @@ describe('board.js > checkIfPlayerWon(...)', () => {
     expect(returnedResult).toEqual(true);
   });
 
+  // Row 1
+  it('checkIfPlayerWon(grid) detects that one player has won using the 1st row', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // Row 2
+  it('checkIfPlayerWon(grid) detects that one player has won using the 2nd row', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // Row 3
+  it('checkIfPlayerWon(grid) detects that one player has won using the 3rd row', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // Diagonal from the top left to the bottom right
+  it('checkIfPlayerWon(grid) detects that one player has won using the diagonal from the top left to the bottom right', () => {
+    const gridState = [
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_O],
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // Diagonal from the bottom left to the top right
+  it('checkIfPlayerWon(grid) detects that one player has won using the diagonal from the bottom left to the top right', () => {
+    const gridState = [
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X],
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_O]
+    ];
+    
+    const returnedResult = checkIfPlayerWon(gridState);
+
+    expect(returnedResult).toEqual(true);
+  });
+
+  // No one won
   it('checkIfPlayerWon(grid) detects that no one has won', () => {
     const gridState = [
       [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X],
