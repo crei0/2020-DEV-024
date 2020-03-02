@@ -4,7 +4,7 @@ import { PLAYER, GAME_STATE, CELL_VALUES } from '../enums/board';
 import {
   resetBoardState,
   checkIfPlayerWon,
-  checkIfGameIsTied,
+  checkIfGameIsTiedAndNotWon,
   getCurrentGameStateMessage
 } from '../logic/board';
 import BoardCell from '../components/BoardCell';
@@ -51,7 +51,7 @@ class Board extends React.Component {
             grid: grid,
             gameState: GAME_STATE.PLAYER_WON
           });
-        } else if (checkIfGameIsTied(grid)) {
+        } else if (checkIfGameIsTiedAndNotWon(grid)) {
           this.setState({
             grid: grid,
             gameState: GAME_STATE.TIE

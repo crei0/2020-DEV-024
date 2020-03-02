@@ -87,7 +87,7 @@ const _checkIfThereIsStillAnEmptyCell = (grid) => {
  * @param {Array} grid The Grid's array
  * @returns {Boolean}
  */
-export const checkIfGameIsTied = (grid) => {
+export const checkIfGameIsTiedAndNotWon = (grid) => {
   return !checkIfPlayerWon(grid) && _checkIfThereIsStillAnEmptyCell(grid);
 };
 

@@ -3,7 +3,7 @@ import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 import {
   resetBoardState,
   checkIfPlayerWon,
-  checkIfGameIsTied,
+  checkIfGameIsTiedAndNotWon,
   getCurrentGameStateMessage
 } from './board.js';
 
@@ -142,15 +142,15 @@ describe('board.js > checkIfPlayerWon(...)', () => {
   });
 });
 
-describe('board.js > checkIfGameIsTied(...)', () => {
-  it('checkIfGameIsTied(grid) detects the game is tied', () => {
+describe('board.js > checkIfGameIsTiedAndNotWon(...)', () => {
+  it('checkIfGameIsTiedAndNotWon(grid) detects the game is tied', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X]
     ];
 
-    const returnedResult = checkIfGameIsTied(gridState);
+    const returnedResult = checkIfGameIsTiedAndNotWon(gridState);
 
     expect(returnedResult).toEqual(true);
   });
