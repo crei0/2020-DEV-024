@@ -7,7 +7,7 @@ import
   {
     getInitialBoardState,
     checkIfPlayerWon,
-    checkIfGameIsTiedAndNotWon,
+    checkIfGameIsTied,
     getCurrentGameStateMessage,
     calculateNewGameState
   } from './Board';
@@ -166,27 +166,27 @@ describe('checkIfPlayerWon(...)', () => {
   });
 });
 
-describe('checkIfGameIsTiedAndNotWon(...)', () => {
-  test('checkIfGameIsTiedAndNotWon(grid) detects the game is tied', () => {
+describe('checkIfGameIsTied(...)', () => {
+  test('checkIfGameIsTied(grid) detects the game is tied', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X]
     ];
 
-    const returnedResult = checkIfGameIsTiedAndNotWon(gridState);
+    const returnedResult = checkIfGameIsTied(gridState);
 
     expect(returnedResult).toEqual(true);
   });
 
-  test('checkIfGameIsTiedAndNotWon(grid) check if game has not been won', () => {
+  test('checkIfGameIsTied(grid) check if game has not been won', () => {
     const gridState = [
       [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
       [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_x],
       [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X]
     ];
 
-    const returnedResult = checkIfGameIsTiedAndNotWon(gridState);
+    const returnedResult = checkIfGameIsTied(gridState);
 
     expect(returnedResult).toEqual(false);
   });

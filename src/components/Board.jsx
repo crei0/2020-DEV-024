@@ -90,7 +90,7 @@ const _checkIfThereIsStillAnEmptyCell = (grid) => {
  * @param {Array} grid The Grid's array
  * @returns {Boolean}
  */
-export const checkIfGameIsTiedAndNotWon = (grid) => {
+export const checkIfGameIsTied = (grid) => {
   return !checkIfPlayerWon(grid) && _checkIfThereIsStillAnEmptyCell(grid);
 };
 
@@ -139,21 +139,22 @@ export const calculateNewGameState = (gameState, grid, currentPlayer, x, y) => {
           grid: grid,
           gameState: GAME_STATE.PLAYER_WON
         };
-      } else if (checkIfGameIsTiedAndNotWon(grid)) {
+      }
+      
+      if (checkIfGameIsTied(grid)) {
         // Did the game reach a draw/tie state?
 
         return {
           grid: grid,
           gameState: GAME_STATE.TIE
         };
-      } else {
-        // With the current player's play, no one won, and they (both players) didn't draw/tie, so continue
-
-        return {
-          grid: grid,
-          currentPlayer: currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X
-        };
       }
+      
+      // With the current player's play, no one won, and they (both players) didn't draw/tie, so continue
+      return {
+        grid: grid,
+        currentPlayer: currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X
+      };
     }
   }
 
