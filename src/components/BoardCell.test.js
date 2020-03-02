@@ -37,6 +37,23 @@ describe('BoardCell', () => {
     expect(text).toEqual(CELL_VALUES.CELL_X);
   });
 
+  it(`It's not clickable because it's not an empty cell`, () => {
+    const mockCallBack = jest.fn();
+    
+    const boardCell = shallow((
+      <BoardCell
+        y={0}
+        x={0}
+        value={CELL_VALUES.CELL_X}
+        clickHandler={mockCallBack}
+      />
+    ));
+
+    const button = boardCell.find('button');
+
+    expect(button.prop('disabled')).toEqual(true);
+  });
+
   it('Test click event', () => {
     const mockCallBack = jest.fn();
 
