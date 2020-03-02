@@ -115,6 +115,54 @@ export const getCurrentGameStateMessage = (gameState, currentPlayer) => {
   }
 };
 
+/**
+ * Calculates and returns an new game state
+ * 
+ * @param {(GAME_STATE|String)} gameState The game state
+ * @param {Array} grid The grid array
+ * @param {(PLAYER|String)} currentPlayer The current player for this turn
+ * @param {(Number|String)} x The x-axis position for the clicked cell
+ * @param {(Number|String)} y The y-axis position for the clicked cell
+ */
+export const calculateNewGameState = (gameState, grid, currentPlayer, x, y) => {
+  // If the game has been won or tied, don't let the click change the value of a cell
+  if (gameState === GAME_STATE.PLAYING) {
+
+    if (grid[y][x] === CELL_VALUES.EMPTY) {
+      // If it's an empty cell, assign to it the current player's value
+      grid[y][x] = currentPlayer;
+
+      if (checkIfPlayerWon(grid)) {
+        // Did the current player win with that play?
+
+        return {
+          grid: grid,
+          gameState: GAME_STATE.PLAYER_WON
+        };
+      } else if (checkIfGameIsTiedAndNotWon(grid)) {
+        // Did the game reach a draw/tie state?
+
+        return {
+          grid: grid,
+          gameState: GAME_STATE.TIE
+        };
+      } else {
+        // With the current player's play, no one won, and they (both players) didn't draw/tie, so continue
+
+        return {
+          grid: grid,
+          currentPlayer: currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X
+        };
+      }
+    }
+  }
+
+  return null;
+};
+
+/**
+ * The board
+ */
 class Board extends React.Component {
   state = {
     grid: [],
@@ -148,27 +196,10 @@ class Board extends React.Component {
       gameState
     } = this.state;
     
-    if (gameState === GAME_STATE.PLAYING) {
-      if (grid[y][x] === CELL_VALUES.EMPTY) {
-        grid[y][x] = currentPlayer;
-  
-        if (checkIfPlayerWon(grid)) {
-          this.setState({
-            grid: grid,
-            gameState: GAME_STATE.PLAYER_WON
-          });
-        } else if (checkIfGameIsTiedAndNotWon(grid)) {
-          this.setState({
-            grid: grid,
-            gameState: GAME_STATE.TIE
-          });
-        } else {
-          this.setState({
-            grid: grid,
-            currentPlayer: currentPlayer === PLAYER.X ? PLAYER.O : PLAYER.X
-          });
-        }
-      }
+    const newState = calculateNewGameState(gameState, grid, currentPlayer, x, y);
+    
+    if (newState) {
+      this.setState(newState);
     }
   };
 

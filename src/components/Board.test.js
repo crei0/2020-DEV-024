@@ -8,7 +8,8 @@ import
     getInitialBoardState,
     checkIfPlayerWon,
     checkIfGameIsTiedAndNotWon,
-    getCurrentGameStateMessage
+    getCurrentGameStateMessage,
+    calculateNewGameState
   } from './Board';
 import { PLAYER, GAME_STATE, CELL_VALUES } from '../enums/board';
 import BoardCell from './BoardCell';
@@ -31,7 +32,7 @@ describe('Board', () => {
 });
 
 describe('getInitialBoardState(...)', () => {
-  it('getInitialBoardState() returns an empty grid state', () => {
+  test('getInitialBoardState() returns an empty grid state', () => {
     const expectedResult = {
       grid: [
         [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
@@ -42,13 +43,13 @@ describe('getInitialBoardState(...)', () => {
       gameState: GAME_STATE.PLAYING
     };
 
-    expect(getInitialBoardState()).toStrictEqual(expectedResult)
+    expect(getInitialBoardState()).toStrictEqual(expectedResult);
   });
 });
 
 describe('checkIfPlayerWon(...)', () => {
   // Column 1
-  it('checkIfPlayerWon(grid) detects that one player has won using the 1st column', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the 1st column', () => {
     const gridState = [
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
@@ -61,7 +62,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Column 2
-  it('checkIfPlayerWon(grid) detects that one player has won using the 2nd column', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the 2nd column', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
@@ -74,7 +75,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Column 3
-  it('checkIfPlayerWon(grid) detects that one player has won using the 3rd column', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the 3rd column', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
@@ -87,7 +88,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Row 1
-  it('checkIfPlayerWon(grid) detects that one player has won using the 1st row', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the 1st row', () => {
     const gridState = [
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
@@ -100,7 +101,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Row 2
-  it('checkIfPlayerWon(grid) detects that one player has won using the 2nd row', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the 2nd row', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
@@ -113,7 +114,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Row 3
-  it('checkIfPlayerWon(grid) detects that one player has won using the 3rd row', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the 3rd row', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.EMPTY],
       [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
@@ -126,7 +127,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Diagonal from the top left to the bottom right
-  it('checkIfPlayerWon(grid) detects that one player has won using the diagonal from the top left to the bottom right', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the diagonal from the top left to the bottom right', () => {
     const gridState = [
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_O],
       [CELL_VALUES.EMPTY, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
@@ -139,7 +140,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // Diagonal from the bottom left to the top right
-  it('checkIfPlayerWon(grid) detects that one player has won using the diagonal from the bottom left to the top right', () => {
+  test('checkIfPlayerWon(grid) detects that one player has won using the diagonal from the bottom left to the top right', () => {
     const gridState = [
       [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X],
       [CELL_VALUES.EMPTY, CELL_VALUES.CELL_X, CELL_VALUES.EMPTY],
@@ -152,7 +153,7 @@ describe('checkIfPlayerWon(...)', () => {
   });
 
   // No one won
-  it('checkIfPlayerWon(grid) detects that no one has won', () => {
+  test('checkIfPlayerWon(grid) detects that no one has won', () => {
     const gridState = [
       [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_X],
       [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.CELL_O],
@@ -166,7 +167,7 @@ describe('checkIfPlayerWon(...)', () => {
 });
 
 describe('checkIfGameIsTiedAndNotWon(...)', () => {
-  it('checkIfGameIsTiedAndNotWon(grid) detects the game is tied', () => {
+  test('checkIfGameIsTiedAndNotWon(grid) detects the game is tied', () => {
     const gridState = [
       [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
       [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
@@ -178,7 +179,7 @@ describe('checkIfGameIsTiedAndNotWon(...)', () => {
     expect(returnedResult).toEqual(true);
   });
 
-  it('checkIfGameIsTiedAndNotWon(grid) check if game has not been won', () => {
+  test('checkIfGameIsTiedAndNotWon(grid) check if game has not been won', () => {
     const gridState = [
       [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
       [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_x],
@@ -192,21 +193,111 @@ describe('checkIfGameIsTiedAndNotWon(...)', () => {
 });
 
 describe('getCurrentGameStateMessage(...)', () => {
-  it('getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O) returns that the player O has won', () => {
+  test('getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O) returns that the player O has won', () => {
     const message = getCurrentGameStateMessage(GAME_STATE.PLAYER_WON, PLAYER.O);
 
     expect(message).toEqual(`The player '${PLAYER.O}' WON`);
   });
 
-  it('getCurrentGameStateMessage(GAME_STATE.TIE, PLAYER.X) returns that the game is tied and it needs to be restarted', () => {
+  test('getCurrentGameStateMessage(GAME_STATE.TIE, PLAYER.X) returns that the game is tied and it needs to be restarted', () => {
     const message = getCurrentGameStateMessage(GAME_STATE.TIE, PLAYER.X);
 
     expect(message).toEqual('The game is TIED, please restart');
   });
 
-  it('getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X) returns that the game is being played and it is player X turn', () => {
+  test('getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X) returns that the game is being played and it is player X turn', () => {
     const message = getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X);
 
     expect(message).toEqual(`The current player is '${PLAYER.X}'`);
+  });
+});
+
+describe('calculateNewGameState(...)', () => {
+  test('calculateNewGameState(GAME_STATE.PLAYING, grid, PLAYER.X, 0, 0) Game is tied, do not allow any change to game state', () => {
+    const testGrid = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X]
+    ];
+
+    const result = calculateNewGameState(GAME_STATE.PLAYING, testGrid, PLAYER.X, 0, 0);
+    
+    expect(result).toEqual(null);
+  });
+
+  test('calculateNewGameState(GAME_STATE.PLAYING, grid, PLAYER.X, 0, 0) Game has been won by player X, do not allow any change to game state', () => {
+    // Player X won using diagonal from bottom left to top right
+    const testGrid = [
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_O]
+    ];
+
+    const result = calculateNewGameState(GAME_STATE.PLAYING, testGrid, PLAYER.X, 0, 0);
+    
+    expect(result).toEqual(null);
+  });
+
+  test('calculateNewGameState(GAME_STATE.PLAYING, grid, PLAYER.X, 0, 0) to correctly simulate new game first click on (0,0)', () => {
+    const testGrid = [
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
+      [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY]
+    ];
+    
+    const expectedResult = {
+      grid: [
+        [CELL_VALUES.CELL_X, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
+        [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
+        [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY]
+      ],
+      currentPlayer: PLAYER.O
+    };
+
+    const result = calculateNewGameState(GAME_STATE.PLAYING, testGrid, PLAYER.X, 0, 0);
+    
+    expect(result).toEqual(expectedResult);
+  });
+  
+  test('calculateNewGameState(GAME_STATE.PLAYING, grid, PLAYER.X, 0, 0) Player X has won', () => {
+    const testGrid = [
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_O]
+    ];
+    
+    const expectedResult = {
+      grid: [
+        [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+        [CELL_VALUES.CELL_O, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O],
+        [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_O]
+      ],
+      gameState: GAME_STATE.PLAYER_WON
+    };
+
+    const result = calculateNewGameState(GAME_STATE.PLAYING, testGrid, PLAYER.X, 0, 0);
+    
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('calculateNewGameState(GAME_STATE.PLAYING, grid, PLAYER.X, 0, 0) Game has been tied', () => {
+    const testGrid = [
+      [CELL_VALUES.EMPTY, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+      [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O]
+    ];
+
+    const expectedResult = {
+      grid: [
+        [CELL_VALUES.CELL_X, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+        [CELL_VALUES.CELL_O, CELL_VALUES.CELL_O, CELL_VALUES.CELL_X],
+        [CELL_VALUES.CELL_X, CELL_VALUES.CELL_X, CELL_VALUES.CELL_O]
+      ],
+      gameState: GAME_STATE.TIE
+    };
+
+    const result = calculateNewGameState(GAME_STATE.PLAYING, testGrid, PLAYER.X, 0, 0);
+    
+    expect(result).toEqual(expectedResult);
   });
 });
