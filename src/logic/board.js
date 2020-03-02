@@ -1,11 +1,11 @@
 import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
 /**
- * Resets the grid and makes player X the current player
+ * Resets the grid cell values, makes player 'X' the current player, and changes the game state to be playing
  * 
  * @returns {Object} The re-initialized grid state
  */
-export const resetGridState = () => (
+export const resetBoardState = () => (
   {
     grid: [
       [CELL_VALUES.EMPTY,  CELL_VALUES.EMPTY,   CELL_VALUES.EMPTY],

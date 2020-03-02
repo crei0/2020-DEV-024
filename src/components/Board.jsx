@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PLAYER, GAME_STATE, CELL_VALUES } from '../enums/board';
 import {
-  resetGridState,
+  resetBoardState,
   checkIfPlayerWon,
   checkIfGameIsTied,
   getCurrentGameStateMessage
@@ -25,7 +25,7 @@ class Board extends React.Component {
    */
   resetGrid = () => {
     this.setState(
-      resetGridState()
+      resetBoardState()
     );
   }
 

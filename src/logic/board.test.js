@@ -1,14 +1,14 @@
 import { CELL_VALUES, PLAYER, GAME_STATE } from '../enums/board';
 
 import {
-  resetGridState,
+  resetBoardState,
   checkIfPlayerWon,
   checkIfGameIsTied,
   getCurrentGameStateMessage
 } from './board.js';
 
-describe('board.js > resetGridState(...)', () => {
-  it('resetGridState() returns an empty grid state', () => {
+describe('board.js > resetBoardState(...)', () => {
+  it('resetBoardState() returns an empty grid state', () => {
     const expectedResult = {
       grid: [
         [CELL_VALUES.EMPTY, CELL_VALUES.EMPTY, CELL_VALUES.EMPTY],
@@ -19,7 +19,7 @@ describe('board.js > resetGridState(...)', () => {
       gameState: GAME_STATE.PLAYING
     };
 
-    expect(resetGridState()).toStrictEqual(expectedResult)
+    expect(resetBoardState()).toStrictEqual(expectedResult)
   });
 });
 
