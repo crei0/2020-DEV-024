@@ -70,7 +70,7 @@ describe('board.js', () => {
     expect(message).toEqual('The game is TIED, please restart');
   });
 
-  it('getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X) returns that the game is tied and it needs to be restarted', () => {
+  it('getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X) returns that the game is being played and it is player X turn', () => {
     const message = getCurrentGameStateMessage(GAME_STATE.PLAYING, PLAYER.X);
 
     expect(message).toEqual(`The current player is '${PLAYER.X}'`);
