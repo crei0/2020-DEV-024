@@ -68,7 +68,7 @@ export const checkIfPlayerWon = (grid) => {
 };
 
 /**
- * Checks if there's a
+ * Checks if there's an empty cell
  * 
  * @param {Array} grid The Grid's array
  * @returns {Boolean}
